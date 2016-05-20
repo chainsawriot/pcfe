@@ -60,3 +60,65 @@ NOTE: There is no undelete for `rm`!
 
 Now you know 3 commands: `ls`, `less` and `rm`
 
+#### > and >>
+
+`>>` is appending.
+
+```{sh}
+ls ./inaugural > inaug_list.txt
+less inaug_list.txt
+ls ~/ > inaug_list.txt
+less inaug_list.txt
+ls ./inaugural >> inaug_list.txt
+less inaug_list.txt
+rm inaug_list.txt
+```
+
+More on [redirection](https://en.wikipedia.org/wiki/Redirection_(computing)).
+
+### Piping
+
+Puting the text output of one command as the text input of another command with `|`.
+
+```{sh}
+ls ./inaugural | less
+man wc
+wc -l ./inaugural/2013-Obama.txt
+ls ./inaugural | wc -l
+```
+
+Explain to yourself what is the meaning of the last command.
+
+Now you know 4 commands: `ls`, `less`, `rm` and `wc`.
+
+## Unix philosophy
+
+> This is the Unix philosophy: Write programs that do one thing and do it well. Write programs to work together. Write programs to handle text streams, because that is a universal interface.
+
+- Doug Mcllroy
+
+More on [Unix philosophy](https://en.wikipedia.org/wiki/Unix_philosophy).
+
+In summary:
+
+1. Do one thing (`ls`, `less`, `rm` and `wc` have only one single purpose) 
+2. Chain tools together by redirecting / piping
+3. TEXT STREAMS!
+
+### Text stream modification (usually with REGEX)
+
+Which last name of president has the most number of inaugural address?
+
+```{sh}
+echo 'HKOSCON2016'
+echo 'HKOSCON2016' | sed 's/[0-9]/he/g'
+echo 'HSOSCON2016' | sed 's/[0-9]//g'
+ls ./inaugural | sed 's/[0-9]//g'
+ls ./inaugural | sed 's/[0-9\-]//g'
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g'
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort | uniq
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort | uniq -c
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort | uniq -c | sort -nr
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort | uniq -c | sort -nr | head -n 20
+```
