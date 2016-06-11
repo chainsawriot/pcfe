@@ -107,7 +107,7 @@ In summary:
 
 ### Text stream modification (usually with REGEX)
 
-Which last name of president has the most number of inaugural address?
+Which last name of president has the most number of inaugural addresses?
 
 ```{sh}
 echo 'HKOSCON2016'
