@@ -293,4 +293,26 @@ QUESTION and Challenge #3: Modify and create an extractor of domain name from UR
 
 ### Optional: GNU parallel
 
+## Alias (time saving technique)
 
+consider the problem in chap1.md
+
+```{sh}
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort | uniq -c | sort -nr | head -n 20
+```
+
+`sort | uniq -c | sort -nr | head -n 20` is describing the steps to conduct the job of "ranking most 20 items". But the meaning of such a chain is not sensible to us. We want to hide the execution details but use a sensible keyword. We can use alias to abstract these steps.
+
+```{sh}
+alias rank='sort | uniq -c | sort -nr | head -n 20'
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | rank
+```
+
+or even
+
+```{sh}
+alias rank='sort | uniq -c | sort -nr | head -n '
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | rank 30
+```
+
+You can create some useful aliases and put them into your .bashrc / .zshrc.
