@@ -40,10 +40,15 @@ mkdir rubbish ; find untidier -type f -print0 | xargs -0 -I {} cp {} rubbish
 
 Let's create a tidying script 'tidy' a untidied directory to a tidy one.
 
+```{sh}
+find untidier -maxdepth 1 -type f
+```
+
 ## usage example
 
 `crontab -e`
 
 and let it tidy up your Download directory.
 
+## PATH
 
