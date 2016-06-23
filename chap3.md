@@ -64,6 +64,10 @@ Determine the file extension of a file
 echo 'hello.PNG' | grep -o '[0-9A-Za-z]\+$' | tr '[:upper:]' '[:lower:]'
 ```
 
+```{sh}
+ext=`echo "$1" | grep -o '[0-9A-Za-z]\+$' | tr '[:upper:]' '[:lower:]'`
+```
+
 Determine existence of a Dir with $ext
 
 ```{sh}
@@ -80,6 +84,8 @@ fi
 ## usage example
 
 `crontab -e`
+
+reference: http://www.computerhope.com/unix/ucrontab.htm
 
 and let it tidy up your Download directory.
 
