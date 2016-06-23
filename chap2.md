@@ -287,15 +287,21 @@ Try this also
 find ./hillary -type f | ./massex.sh | sort | uniq -c | sort -nr | head -n 50
 ```
 
-Discuss what you find from the result and how to improve it.
+Discuss what you find from the result.
 
 QUESTION and Challenge #3: Modify and create an extractor of domain name from URL in Hillary's email. Modify `massex.sh` to parameterize with different extractors. Extract the most popular domain names.
+
+### xargs, a even smarter method, no need to write loop
+
+```{sh}
+find ./hillary -type f | xargs -I {} ./emailex.sh {}
+```
 
 ### Optional: GNU parallel
 
 ## Alias (time saving technique)
 
-consider the problem in chap1.md
+Consider the problem in chap1.md
 
 ```{sh}
 ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | sort | uniq -c | sort -nr | head -n 20
@@ -311,8 +317,9 @@ ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | rank
 or even
 
 ```{sh}
-alias rank='sort | uniq -c | sort -nr | head -n '
-ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | rank 30
+alias rank='sort | uniq -c | sort -nr | head'
+ls ./inaugural | sed 's/[0-9\-]//g' | sed 's/\.txt$//g' | rank -n 30
 ```
 
 You can create some useful aliases and put them into your .bashrc / .zshrc.
+Reload your shell, or `source ~/.bashrc`

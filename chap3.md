@@ -33,16 +33,49 @@ Let's create a untidying script together to 'untidy' a tidied directory into ano
 advance users might use:
 
 ```{sh}
-mkdir rubbish ; find untidier -type f -print0 | xargs -0 -I {} cp {} rubbish
+mkdir rubbish ; find untidier -type f | xargs -I {} cp {} rubbish
 ```
 
 ## tidying
 
 Let's create a tidying script 'tidy' a untidied directory to a tidy one.
 
+Just listing the files, non-recursively. (Not including directories)
+
 ```{sh}
 find untidier -maxdepth 1 -type f
 ```
+
+Exclude certain file
+
+```{sh}
+find . -maxdepth 1 -type f | grep -v 'jmsc\.png$'
+```
+
+Exclude hidden files
+
+```{sh}
+find . -maxdepth 1 -type f | grep -v '/\.'
+```
+
+Determine the file extension of a file
+
+```{sh}
+echo 'hello.PNG' | grep -o '[0-9A-Za-z]\+$' | tr '[:upper:]' '[:lower:]'
+```
+
+Determine existence of a Dir with $ext
+
+```{sh}
+if [ -d "$ext" ]
+then
+    mv $1 $ext
+else
+    mkdir $ext
+    mv $1 $ext
+fi
+```
+
 
 ## usage example
 
